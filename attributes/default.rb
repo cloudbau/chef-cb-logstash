@@ -1,5 +1,4 @@
 default["cb-logstash"]["openstack"]["services"] = ["nova", "cinder", "quantum", "keystone", "glance"]
-default["cb-logstash"]["logging"]["formatter"] = "git+git://github.com/mouadino/logstasher.git"
 
 override['logstash']['elasticsearch_role'] = 'single-controller'
 override['logstash']['server']['enable_embedded_es'] = false
