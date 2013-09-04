@@ -13,7 +13,13 @@ node_services.each do |srv_name|
 end
 
 # Get ip used by elasticsearch.
-node.set['logstash']['elasticsearch_ip'] = search(:node, "roles:logstash-server AND chef_environment:#{node.chef_environment}").first.ipaddress
+if node.roles.include? "logstash-server" then
+  ipaddress = node["ipaddress"]
+else
+  ipaddress = search(:node, "roles:logstash-server AND chef_environment:#{node.chef_environment}").first["ipaddress"]
+end
+
+node.set['logstash']['elasticsearch_ip'] = ipaddress
 node.set['logstash']['elasticsearch_port'] = 9200  # XXX: Port is hard coded here.
 
 node_services.each do |srv_name|
