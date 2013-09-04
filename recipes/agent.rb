@@ -22,8 +22,10 @@ end
 node.set['logstash']['elasticsearch_ip'] = ipaddress
 node.set['logstash']['elasticsearch_port'] = 9200  # XXX: Port is hard coded here.
 
+
+inputs =[] 
 node_services.each do |srv_name|
-  node.set['logstash']['agent']['inputs'].push({
+  inputs.push({
     'file' => {
       'type' => srv_name,
       'start_position' => 'beginning',
@@ -32,11 +34,13 @@ node_services.each do |srv_name|
     }
   })
 end
+node.set['logstash']['agent']['inputs'] = inputs
 
-node.set['logstash']['agent']['outputs'].push({
+node.set['logstash']['agent']['outputs'] = [{
   'elasticsearch_http' => {
     'host' => "#{node['logstash']['elasticsearch_ip']}",
     'port' => "#{node['logstash']['elasticsearch_port']}",
     'flush_size' => 1
   }
-})
+}]
+
