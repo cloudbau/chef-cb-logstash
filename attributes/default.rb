@@ -1,5 +1,8 @@
 default["cb-logstash"]["openstack"]["services"] = ["nova", "cinder", "quantum", "keystone", "glance"]
 
+normal['logstash']['server']['version'] = '1.2.0'
+normal['logstash']['agent']['version'] = '1.2.0'
+
 override['logstash']['elasticsearch_role'] = 'single-controller'
 override['logstash']['server']['enable_embedded_es'] = false
 
