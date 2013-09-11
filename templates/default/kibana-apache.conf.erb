@@ -16,9 +16,9 @@
     Require valid-user
   </Location>
 
-  #SSLEngine on
-  #SSLCertificateFile /etc/ssl/certs/cb.crt
-  #SSLCertificateKeyFile /etc/ssl/private/cb.key
+  SSLEngine on
+  SSLCertificateFile /etc/ssl/certs/cb.crt
+  SSLCertificateKeyFile /etc/ssl/private/cb.key
 
   LogLevel debug
   ErrorLog <%= node['apache']['log_dir'] %>/<%= @params[:server_name] %>.error.log
