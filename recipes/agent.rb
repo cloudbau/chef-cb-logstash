@@ -14,9 +14,9 @@ end
 
 # Get ip used by elasticsearch.
 if node.roles.include? "logstash-server" then
-  ipaddress = node["ipaddress"]
+  ipaddress = node['elasticsearch']['network.bind_host']
 else
-  ipaddress = search(:node, "roles:logstash-server AND chef_environment:#{node.chef_environment}").first["ipaddress"]
+  ipaddress = search(:node, "roles:logstash-server AND chef_environment:#{node.chef_environment}").first['elasticsearch']['network.bind_host']
 end
 
 node.set['logstash']['elasticsearch_ip'] = ipaddress
@@ -43,4 +43,3 @@ node.set['logstash']['agent']['outputs'] = [{
     'flush_size' => 1
   }
 }]
-
