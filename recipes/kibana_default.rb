@@ -9,6 +9,9 @@ include_recipe 'apache2::mod_authn_file'
 # it will be merged with all role-level apache listen port settings
 # node.normal['apache']['listen_ports'] = [node['kibana']['webserver_port'].to_s]
 
+::Chef::Recipe.send(:include, Opscode::OpenSSL::Password)
+node.set_unless['cb-logstash']['kibana']['password'] = secure_password
+
 node.normal['kibana']['apache']['template_cookbook'] = 'cb-logstash'
 
 include_recipe 'kibana::default'
