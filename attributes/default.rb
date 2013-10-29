@@ -1,4 +1,4 @@
-default["cb-logstash"]["openstack"]["services"] = ["nova", "cinder", "quantum", "keystone", "glance"]
+default["cb-logstash"]["openstack"]["services"] = ["nova", "cinder", "neutron", "keystone", "glance"]
 
 normal['logstash']['server']['version'] = '1.2.0'
 normal['logstash']['agent']['version'] = '1.2.0'
