@@ -1,8 +1,11 @@
 include_recipe "python::pip"
 include_recipe "logstash::agent"
 
+# FIXME(mouad): Think about a cleanest way to do this.
+# Get available recipes from the run list.
+recipes = Set.new(node.run_list.expand(node.chef_environment).recipes.map { |s| s.split("::")[0] })
 # Get all openstack services loaded by this node.
-node_services = node["cb-logstash"]["openstack"]["services"].select{ |s| File.exists?("/opt/cloudbau/#{s}-virtualenv") }
+node_services = node["cb-logstash"]["openstack"]["services"].select{ |s| recipes.include?(s) }
 
 node_services.each do |srv_name|
   # XXX(mouad): logstasher python package should be already installed when
