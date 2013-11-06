@@ -1,6 +1,7 @@
 require 'digest/md5'
 
 # additional modules needed for digest auth of users from files
+include_recipe "apache2::mod_ssl"
 include_recipe 'apache2::mod_auth_digest'
 include_recipe 'apache2::mod_authz_user'
 include_recipe 'apache2::mod_authn_file'
